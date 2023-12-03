@@ -1,0 +1,155 @@
+<template>
+  <div class="honeycomb">
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(0, 11)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(11, 22)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(22, 33)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(33, 44)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(44, 55)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+    <div class="ibws-fix">
+      <SavingItem
+        v-for="saving in store.savings.slice(55)"
+        :key="saving.id"
+        :saving="saving"
+      ></SavingItem>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { onMounted } from "vue";
+import { useCounterStore } from "@/stores/product";
+import SavingItem from "@/components/SavingItem.vue";
+
+const store = useCounterStore();
+</script>
+
+<style lang="scss" scoped>
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: Merriweather, Georgia, serif;
+  font-size: 62.5%;
+}
+body {
+  color: hsl(0, 0%, 10%);
+  background-color: hsl(0, 0%, 95%);
+  border-top: 5px solid hsl(220, 50%, 75%);
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 30px;
+  bottom: 0;
+  top: 0;
+}
+.hexagon {
+  position: relative;
+  display: inline-block;
+  /* left/right margin approx. 25% of .hexagon width + spacing */
+  margin: 1px 18px;
+  // background-color: hsl(220, 75%, 75%);
+  background-color: rgb(239, 217, 143);
+  text-align: center;
+}
+.hexagon,
+.hexagon::before,
+.hexagon::after {
+  /* easy way: height is width * 1.732
+  actual formula is 2*(width/(2*Math.tan(Math.PI/6)))
+  remove border-radius for sharp corners on hexagons */
+  width: 67px;
+  height: 116px;
+  // border-radius: 20%/5%;
+}
+.hexagon::before {
+  background-color: inherit;
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: rotate(-60deg);
+}
+.hexagon::after {
+  background-color: inherit;
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: rotate(60deg);
+}
+.hexagon:nth-child(even) {
+  /* top approx. 50% of .hexagon height + spacing */
+  top: 59px;
+}
+.hexagon:hover {
+  background-color: hsla(60, 75%, 75%, 1);
+  cursor: pointer;
+  z-index: 105;
+}
+.hexagon:active {
+  background-color: hsla(60, 75%, 50%, 1);
+  z-index: 110;
+}
+.hexanone {
+  position: relative;
+  display: inline-block;
+  width: 67px;
+  height: 116px;
+  margin: 1px 18px;
+}
+.hexanone:nth-child(even) {
+  top: 59px;
+}
+.hexagontent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  z-index: 100;
+}
+.ibws-fix {
+  /* inline-block whitespace fix */
+  font-size: 0;
+}
+.honeycomb {
+  margin: 20vh auto;
+
+  text-align: center;
+}
+</style>
